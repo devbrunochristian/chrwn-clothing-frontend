@@ -1,8 +1,9 @@
 import React from 'react'
 import Menu from '../../components/Menu/Menu'
+import './styles.scss'
 
 const HomePage = (): React.ReactElement => (
-    <div>
+    <div className="homepage">
         <Menu />
     </div>
 )

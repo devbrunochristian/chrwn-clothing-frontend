@@ -1,0 +1,15 @@
+.collection-preview {
+    margin-bottom: 30px;
+
+    .title {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+
+    .preview {
+        display: flex;
+        overflow: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+}
