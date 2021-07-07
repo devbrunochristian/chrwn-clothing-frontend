@@ -1,7 +1,7 @@
 import React from 'react'
 import { IShopData } from '../../interfaces/IShopData'
 import PreviewItem from './preview-item/PreviewItem'
-import './styles.scss'
+import './preview-collection.styles.scss'
 
 const PreviewCollection: React.FunctionComponent<IShopData> = ({
     items,

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PreviewCollection from '../../components/preview-collection/PreviewCollection'
 import { IShopData } from '../../interfaces/IShopData'
 import SHOP_DATA from '../../ShopData'
-import './styles.scss'
+import './shop-page.styles.scss'
 
 const ShopPage = (): React.ReactElement => {
     const [shopData] = useState(SHOP_DATA)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import './styles.scss'
+import './menu-item.styles.scss'
 
 interface Props {
     title: string

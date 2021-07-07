@@ -1,7 +1,7 @@
 import CustomButton from 'components/custom-button/Custom-button'
 import FormInput from 'components/form-input/Form-input'
 import React, { useState } from 'react'
-import './loginPage.styles.scss'
+import './login-page.styles.scss'
 
 const LoginPage = (): React.ReactElement => {
     const [email, setEmail] = useState<string>('')

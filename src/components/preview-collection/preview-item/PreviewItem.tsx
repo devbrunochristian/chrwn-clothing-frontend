@@ -1,6 +1,6 @@
 import React from 'react'
 import { IShopItem } from '../../../interfaces/IShopItem'
-import './styles.scss'
+import './preview-item.styles.scss'
 
 const PreviewItem: React.FunctionComponent<IShopItem> = ({
     name,
