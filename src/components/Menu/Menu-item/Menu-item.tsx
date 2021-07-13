@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import './menu-item.styles.scss'
+import useStyles from './menu-item.styles'
 
 interface Props {
     title: string
@@ -11,25 +11,26 @@ interface Props {
 }
 
 const MenuItem: React.FunctionComponent<Props> = (props) => {
-    const { title, subtitle, size, imageUrl, linkUrl } = props
+    const { title, subtitle, imageUrl, linkUrl } = props
     const history = useHistory()
-
+    const { root, backgroundImage, content, contentTitle, contentSubtitle } =
+        useStyles()
     const handleNavigate = (): void => history.push(linkUrl)
     return (
         <div
-            className={`${size} menu-item`}
+            className={root}
             onClick={handleNavigate}
             onKeyDown={handleNavigate}
         >
             <div
-                className="background-image"
+                className={backgroundImage}
                 style={{
                     backgroundImage: `url(${imageUrl})`,
                 }}
             />
-            <div className="content">
-                <div className="title">{title.toUpperCase()}</div>
-                <div className="subtitle">{subtitle}</div>
+            <div className={content}>
+                <div className={contentTitle}>{title.toUpperCase()}</div>
+                <div className={contentSubtitle}>{subtitle}</div>
             </div>
         </div>
     )

@@ -1,15 +1,20 @@
+import { signInUser } from 'actions/user-actions'
 import CustomButton from 'components/custom-button/Custom-button'
 import FormInput from 'components/form-input/Form-input'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import './login-page.styles.scss'
 
 const LoginPage = (): React.ReactElement => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const dispatch = useDispatch()
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
-        console.log(email, password)
+        dispatch(signInUser(email, password))
+        setEmail('')
+        setPassword('')
     }
 
     return (
