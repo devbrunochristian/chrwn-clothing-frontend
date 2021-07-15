@@ -3,12 +3,13 @@ import CustomButton from 'components/custom-button/Custom-button'
 import FormInput from 'components/form-input/Form-input'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import './login-page.styles.scss'
+import useStyles from './login-page.styles'
 
 const LoginPage = (): React.ReactElement => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const dispatch = useDispatch()
+    const { container } = useStyles()
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
@@ -18,7 +19,7 @@ const LoginPage = (): React.ReactElement => {
     }
 
     return (
-        <div className="sign-in">
+        <div className={container}>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
 

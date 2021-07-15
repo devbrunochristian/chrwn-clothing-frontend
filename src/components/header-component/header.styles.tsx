@@ -3,12 +3,13 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles({
     root: {
         marginBottom: 10,
+        backgroundColor: 'white',
     },
     toolbar: {
         justifyContent: 'space-between',
     },
     appbar: {
-        backgroundColor: 'whitesmoke',
+        backgroundColor: 'white',
     },
     menu: {
         '& a': {
