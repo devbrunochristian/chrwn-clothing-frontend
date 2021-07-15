@@ -1,15 +1,18 @@
+/* eslint-disable react/no-unescaped-entities */
 import { signInUser } from 'actions/user-actions'
 import CustomButton from 'components/custom-button/Custom-button'
 import FormInput from 'components/form-input/Form-input'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import useStyles from './login-page.styles'
+import { Link } from 'react-router-dom'
+import useStyles from './signinPage.styles'
 
-const LoginPage = (): React.ReactElement => {
+const SigninPage = (): React.ReactElement => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const dispatch = useDispatch()
-    const { container } = useStyles()
+    const classes = useStyles()
+    const { container, signupText } = classes
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
@@ -45,9 +48,13 @@ const LoginPage = (): React.ReactElement => {
                     required
                 />
                 <CustomButton type="submit"> Sign in </CustomButton>
+                <span className={signupText}>
+                    Don't you have an account?{' '}
+                    <Link to="/signup">Register now</Link>
+                </span>
             </form>
         </div>
     )
 }
 
-export default LoginPage
+export default SigninPage

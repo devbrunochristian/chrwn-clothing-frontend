@@ -21,7 +21,7 @@ const Header: React.FunctionComponent = () => {
                     </IconButton>
                     <div className={menu}>
                         <Link to="/shop">SHOP</Link>
-                        <Link to="/login">SIGN IN</Link>
+                        <Link to="/signin">SIGN IN</Link>
                     </div>
                 </Toolbar>
             </AppBar>
