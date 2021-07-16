@@ -5,6 +5,7 @@ import SigninPage from 'pages/SigninPage/SigninPage'
 import SignupPage from 'pages/SignupPage/SignupPage'
 import HomePage from './pages/HomePage/HomePage'
 import ShopPage from './pages/ShopPage/ShopPage'
+import 'react-toastify/dist/ReactToastify.css'
 import './App.styles.scss'
 
 function App(): React.ReactElement {
