@@ -4,7 +4,7 @@ import CustomButton from 'components/custom-button/Custom-button'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import Input from '@material-ui/core/Input'
 // import FormInput from 'components/form-input/Form-input'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import useStyles from './signinPage.styles'
@@ -30,7 +30,7 @@ const SigninPage = (): React.ReactElement => {
         dispatch(signInUser(email, password))
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (isSubmitSuccessful) {
             reset({ email: '', password: '' })
         }
@@ -50,6 +50,7 @@ const SigninPage = (): React.ReactElement => {
                         rules={{ required: true }}
                         render={({ field }) => (
                             <Input
+                                type="email"
                                 className={input}
                                 placeholder="Email"
                                 {...field}
@@ -64,6 +65,7 @@ const SigninPage = (): React.ReactElement => {
                         rules={{ required: true }}
                         render={({ field }) => (
                             <Input
+                                type="password"
                                 className={input}
                                 placeholder="Password"
                                 {...field}

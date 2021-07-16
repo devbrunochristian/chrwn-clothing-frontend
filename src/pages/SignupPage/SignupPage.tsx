@@ -1,67 +1,118 @@
 import CustomButton from 'components/custom-button/Custom-button'
-import FormInput from 'components/form-input/Form-input'
-import React, { useState } from 'react'
-// import { useDispatch } from 'react-redux'
+import React, { useEffect, useRef } from 'react'
+import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import Input from '@material-ui/core/Input/Input'
 import useStyles from './signupPage.styles'
 
+type Inputs = {
+    name: string
+    email: string
+    password: string
+    confirmPassword: string
+}
 const SignupPage = (): React.ReactElement => {
-    const [email, setEmail] = useState<string>('')
-    const [name, setName] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [confirmPassword, setConfirmPassword] = useState<string>('')
-    // const dispatch = useDispatch()
-    const { container } = useStyles()
+    const {
+        control,
+        handleSubmit,
+        formState: { errors, isSubmitSuccessful },
+        reset,
+        watch,
+    } = useForm<Inputs>()
+    const { container, inputContainer, input } = useStyles()
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-        event.preventDefault()
-        setEmail('')
-        setName('')
-        setConfirmPassword('')
-        setPassword('')
+    const password = useRef({})
+    password.current = watch('password', '')
+
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        console.log(data)
     }
+
+    useEffect(() => {
+        if (isSubmitSuccessful) {
+            reset({ email: '', password: '' })
+        }
+    }, [isSubmitSuccessful, reset])
 
     return (
         <div className={container}>
             <h2>Create a new account</h2>
 
-            <form onSubmit={handleSubmit}>
-                <FormInput
-                    name="name"
-                    type="name"
-                    handleChange={(
-                        e: React.ChangeEvent<HTMLInputElement>
-                    ): void => setName(e.target.value)}
-                    value={name}
-                    label="Name"
-                />
-                <FormInput
-                    name="email"
-                    type="email"
-                    handleChange={(
-                        e: React.ChangeEvent<HTMLInputElement>
-                    ): void => setEmail(e.target.value)}
-                    value={email}
-                    label="Email"
-                />
-                <FormInput
-                    name="password"
-                    type="password"
-                    value={password}
-                    handleChange={(
-                        e: React.ChangeEvent<HTMLInputElement>
-                    ): void => setPassword(e.target.value)}
-                    label="Password"
-                />
-                <FormInput
-                    name="confirmPassword"
-                    type="confirmPassword"
-                    value={confirmPassword}
-                    handleChange={(
-                        e: React.ChangeEvent<HTMLInputElement>
-                    ): void => setConfirmPassword(e.target.value)}
-                    label="Confirm Password"
-                />
-
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className={inputContainer}>
+                    <Controller
+                        name="name"
+                        control={control}
+                        defaultValue=""
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <Input
+                                className={input}
+                                placeholder="Name"
+                                {...field}
+                            />
+                        )}
+                    />
+                    {errors.email && <span>Name is required</span>}
+                    <Controller
+                        name="email"
+                        control={control}
+                        defaultValue=""
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <Input
+                                className={input}
+                                type="email"
+                                placeholder="Email"
+                                {...field}
+                            />
+                        )}
+                    />
+                    {errors.email && <span>Email is required</span>}
+                    <Controller
+                        name="password"
+                        control={control}
+                        defaultValue=""
+                        rules={{
+                            required: 'Password is required',
+                            minLength: {
+                                value: 8,
+                                message:
+                                    'Password must have at least 8 characters',
+                            },
+                        }}
+                        render={({ field }) => (
+                            <Input
+                                className={input}
+                                type="password"
+                                placeholder="Password"
+                                {...field}
+                            />
+                        )}
+                    />
+                    {errors.password && <span>{errors.password.message}</span>}
+                    <Controller
+                        name="confirmPassword"
+                        control={control}
+                        defaultValue=""
+                        rules={{
+                            required: 'Password is required',
+                            validate: (value) =>
+                                value === password.current ||
+                                'The passwords do not match',
+                        }}
+                        render={({ field }) => (
+                            <Input
+                                className={input}
+                                type="password"
+                                placeholder="Confirm Password"
+                                {...field}
+                            />
+                        )}
+                    />
+                    {errors.confirmPassword && (
+                        <span>{errors.confirmPassword.message}</span>
+                    )}
+                </div>
                 <CustomButton type="submit"> Sign up </CustomButton>
             </form>
         </div>
