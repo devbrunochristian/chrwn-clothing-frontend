@@ -6,7 +6,6 @@ interface Props {
     label: string
     name: string
     type: string
-    required: boolean
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     value: string
 }
@@ -16,7 +15,6 @@ const FormInput: React.FunctionComponent<Props> = ({
     value,
     name,
     type,
-    required,
 }) => (
     <div className="group">
         <input
@@ -24,7 +22,6 @@ const FormInput: React.FunctionComponent<Props> = ({
             className="form-input"
             onChange={handleChange}
             name={name}
-            required={required}
             type={type}
         />
         {label ? (

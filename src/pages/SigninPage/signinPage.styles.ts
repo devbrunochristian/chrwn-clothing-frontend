@@ -23,6 +23,13 @@ const useStyles = makeStyles({
             color: 'blue',
         },
     },
+    inputContainer: {
+        marginBottom: 20,
+    },
+    input: {
+        display: 'block',
+        marginTop: 15,
+    },
 })
 
 export default useStyles

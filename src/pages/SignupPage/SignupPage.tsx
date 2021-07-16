@@ -33,7 +33,6 @@ const SignupPage = (): React.ReactElement => {
                     ): void => setName(e.target.value)}
                     value={name}
                     label="Name"
-                    required
                 />
                 <FormInput
                     name="email"
@@ -43,7 +42,6 @@ const SignupPage = (): React.ReactElement => {
                     ): void => setEmail(e.target.value)}
                     value={email}
                     label="Email"
-                    required
                 />
                 <FormInput
                     name="password"
@@ -53,7 +51,6 @@ const SignupPage = (): React.ReactElement => {
                         e: React.ChangeEvent<HTMLInputElement>
                     ): void => setPassword(e.target.value)}
                     label="Password"
-                    required
                 />
                 <FormInput
                     name="confirmPassword"
@@ -63,7 +60,6 @@ const SignupPage = (): React.ReactElement => {
                         e: React.ChangeEvent<HTMLInputElement>
                     ): void => setConfirmPassword(e.target.value)}
                     label="Confirm Password"
-                    required
                 />
 
                 <CustomButton type="submit"> Sign up </CustomButton>
