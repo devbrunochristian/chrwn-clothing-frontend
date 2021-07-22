@@ -12,10 +12,22 @@ const useStyles = makeStyles({
         backgroundColor: 'white',
     },
     menu: {
+        display: 'flex',
+        alignItems: 'center',
+        color: '#4a4a4a',
+        '& span': {
+            fontSize: 16,
+            margin: 10,
+            cursor: 'pointer',
+            '&:hover': {
+                color: 'black',
+            },
+        },
         '& a': {
             color: '#4a4a4a',
             cursor: 'pointer',
             textDecoration: 'none',
+            textTransform: 'none',
             margin: 10,
             fontSize: 16,
             '&:hover': {

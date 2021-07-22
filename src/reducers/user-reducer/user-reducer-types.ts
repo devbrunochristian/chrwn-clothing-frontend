@@ -5,6 +5,7 @@ export interface IUser {
 }
 export interface IUserState {
     user: null | IUser
+    errorMessage: null | string
 }
 
 export interface IUserActions {
@@ -15,5 +16,7 @@ export interface IUserActions {
 export enum UserActions {
     SIGNIN_USER_SUCCESS = 'SIGNIN_USER_SUCCESS',
     SIGNIN_USER_FAIL = 'SIGNIN_USER_FAIL',
+    SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS',
+    SIGNUP_USER_FAIL = 'SIGNUP_USER_FAIL',
     SIGNOUT_USER = 'SIGNOUT_USER',
 }

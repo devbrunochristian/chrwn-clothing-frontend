@@ -4,10 +4,13 @@ import { Link, useHistory } from 'react-router-dom'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import { ReactComponent as Logo } from 'assets/crown.svg'
+import { useSelector } from 'react-redux'
+import { IApplicationState } from 'store'
 import useStyles from './header.styles'
 
 const Header: React.FunctionComponent = () => {
     const history = useHistory()
+    const user = useSelector((state: IApplicationState) => state.user.user)
     const { toolbar, appbar, root, menu } = useStyles()
     return (
         <div className={root}>
@@ -19,10 +22,18 @@ const Header: React.FunctionComponent = () => {
                             onClick={() => history.push('/')}
                         />
                     </IconButton>
-                    <div className={menu}>
-                        <Link to="/shop">SHOP</Link>
-                        <Link to="/signin">SIGN IN</Link>
-                    </div>
+                    {user ? (
+                        <div className={menu}>
+                            <Link to="/shop">SHOP</Link>
+                            <Link to="/cart">CART</Link>
+                            <span>Welcome {user.name}</span>
+                        </div>
+                    ) : (
+                        <div className={menu}>
+                            <Link to="/shop">Shop</Link>
+                            <Link to="/signin">Sign in</Link>
+                        </div>
+                    )}
                 </Toolbar>
             </AppBar>
         </div>

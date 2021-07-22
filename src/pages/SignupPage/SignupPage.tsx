@@ -2,6 +2,10 @@ import CustomButton from 'components/custom-button/Custom-button'
 import React, { useEffect, useRef } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import Input from '@material-ui/core/Input/Input'
+import { IApplicationState } from 'store'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { signUpUser } from 'actions/user-actions'
 import useStyles from './signupPage.styles'
 
 type Inputs = {
@@ -20,23 +24,35 @@ const SignupPage = (): React.ReactElement => {
     } = useForm<Inputs>()
     const { container, inputContainer, input } = useStyles()
 
+    const dispatch = useDispatch()
+    const errorMessage = useSelector(
+        (state: IApplicationState) => state.user.errorMessage
+    )
+    const user = useSelector((state: IApplicationState) => state.user.user)
+    const history = useHistory()
     const password = useRef({})
     password.current = watch('password', '')
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data)
+        dispatch(signUpUser(data.name, data.email, data.password))
     }
 
     useEffect(() => {
         if (isSubmitSuccessful) {
-            reset({ email: '', password: '' })
+            reset({ email: '', password: '', name: '', confirmPassword: '' })
         }
     }, [isSubmitSuccessful, reset])
+
+    useEffect(() => {
+        if (user) {
+            history.push('/')
+        }
+    }, [user, history])
 
     return (
         <div className={container}>
             <h2>Create a new account</h2>
-
+            <span>{errorMessage}</span>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={inputContainer}>
                     <Controller

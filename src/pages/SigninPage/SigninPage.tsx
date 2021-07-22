@@ -5,8 +5,9 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import Input from '@material-ui/core/Input'
 // import FormInput from 'components/form-input/Form-input'
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { IApplicationState } from 'store'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
 import useStyles from './signinPage.styles'
 
 type Inputs = {
@@ -22,6 +23,11 @@ const SigninPage = (): React.ReactElement => {
         reset,
     } = useForm<Inputs>()
     const dispatch = useDispatch()
+    const errorMessage = useSelector(
+        (state: IApplicationState) => state.user.errorMessage
+    )
+    const user = useSelector((state: IApplicationState) => state.user.user)
+    const history = useHistory()
     const classes = useStyles()
     const { container, signupText, input, inputContainer } = classes
 
@@ -36,11 +42,18 @@ const SigninPage = (): React.ReactElement => {
         }
     }, [isSubmitSuccessful, reset])
 
+    useEffect(() => {
+        if (user) {
+            history.push('/')
+        }
+    }, [user, history])
+
     return (
         <div className={container}>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
 
+            <span>{errorMessage}</span>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={inputContainer}>
                     <Controller
